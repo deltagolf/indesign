@@ -2,8 +2,10 @@ main();
 function main(){
     var template = "transcriptions";
     var myDoc = createFromTemplate(template);
+    var text = getWordDocument();
+    placeWordDocument(myDoc, text);
 
-    var pages = app.activeDocument.pages;
+    /*var pages = app.activeDocument.pages;
     var numPages = pages.length;
     //Tablas anidadas en Archivos de vídeo y Archivos de audio
     var specialTable1 = pages.item(0).allPageItems[0].tables.item(4).cells.item(0).tables.item(0).appliedTableStyle = "Test Style";
@@ -17,7 +19,7 @@ function main(){
         for(var i = 0; i < numTables; i++){
             var nTable = tables.item(i).appliedTableStyle = "Test Style";
         }
-    }
+    }*/
   }
 
 function createFromTemplate(template){
@@ -45,11 +47,24 @@ function placeWordDocument(file, text){
 }
 
 function getWordDocument(){
-    var myDialog = app.dialogs.add({name: Selecciona el archivo que quieres colocar});
-    var w = new Window ('dialog {orientation: "row", alignChildren: "top"}');
-        w.text = "Selecciona el archivo que quieres colocar";
-    var text;
+
+    var path = new File("~/desktop");
+    var text = path.openDlg("Elige el archivo:");
     return text;
+}
+
+function find_files (dir) {
+    var list = Folder(dir).getFiles (function (f) {
+        return f.name.search(/\.(?:rtf|docx?)$/gi) !== -1;
+    });
+    if (list.length > 0) {
+        for (var i = 0; i < list.length; i++) {
+            list[i] = decodeURI (list[i].fullName);
+            //array[i] = decodeURI (array[i].name)
+        }
+        list.sort();
+    }
+    return list;
 }
 
 function get_folder ()
@@ -227,19 +242,6 @@ function showPreview (arr) {
     return w
 }
 
-function find_files (dir) {
-    var list = Folder(dir).getFiles (function (f) {
-        return f.name.search(/\.(?:rtf|docx?)$/gi) !== -1;
-    });
-    if (list.length > 0) {
-        for (var i = 0; i < list.length; i++) {
-            list[i] = decodeURI (list[i].fullName);
-            //array[i] = decodeURI (array[i].name)
-        }
-        list.sort();
-    }
-    return list;
-}
 
 
 
