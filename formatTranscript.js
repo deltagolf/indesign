@@ -4,14 +4,13 @@
 main();
 function main(){
     //Declares path to find documents
-    var path = "Volumes/HD3/Esto\ no\ es\ una\ escuela/Corriendo\ por\ las\ olas/Transcripciones/Maquetación/Pruebas";
-    var template = "plantilla_maestra.indt";
-    //Template used for the document
-    var preset = "transcriptions";
-    //VARIATION: Create from template
-    var myDoc = app.documents.open((File(template), true); OpenOptions.DEFAULT_VALUE);
-    //Creates empty file
-    //var myDoc = createFromPreset(preset);
+    var path = "/Volumes/HD3/Esto\ no\ es\ una\ escuela/Corriendo\ por\ las\ olas/Transcripciones/Maquetación/Pruebas";
+    //Path where template document is located
+    var template = "/Volumes/HD3/Esto\ no\ es\ una\ escuela/Corriendo\ por\ las\ olas/Transcripciones/Maquetación/Archivos\ InDesign/plantilla_maestra.indt";
+    //List of styles
+    var basicTableStyle = "Default Table";
+    //Open document from template
+    var myDoc = app.open(File(template), true, OpenOptions.DEFAULT_VALUE);
     //Sets import preferences for Word docs
     set_Word_import_preferences ();
     //Gets the contents for a Word Document
@@ -25,9 +24,8 @@ function main(){
     //Create styles
     //Declare options
     //Paragraph styles
-    var basicParagraphStyle = {
-        name: ,
-
+/*    var basicParagraphStyle = {
+        name: 
     };
     //Cell styles
     var basicCellStyle = {
@@ -38,8 +36,8 @@ function main(){
         topInset : 0,
         bottomInset : ,
         verticalJustification : "ALLIGN_TOP"
-    };
-    var tableStyle = createTableStyle(myDoc, "Test Style");
+    };*/
+ //   var tableStyle = createTableStyle(myDoc, "Test Style");
     //Tablas anidadas en Archivos de vídeo y Archivos de audio
     var specialTable1 = pages.item(0).allPageItems[0].tables.item(4).cells.item(0).tables.item(0).appliedTableStyle = "Test Style";
     var specialTable2 = pages.item(0).allPageItems[0].tables.item(4).cells.item(1).tables.item(0).appliedTableStyle = "Test Style";
