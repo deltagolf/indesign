@@ -2,10 +2,11 @@
 
 main();
 function main(){
+    var path = "Volumes/HD3/Esto\ no\ es\ una\ escuela/Corriendo\ por\ las\ olas/Transcripciones";
     var template = "transcriptions";
     var myDoc = createFromTemplate(template);
     set_Word_import_preferences ();
-    var text = getWordDocument();
+    var text = getWordDocument(path);
     placeWordDocument(myDoc, text);
 
     var pages = myDoc.pages;
@@ -57,10 +58,10 @@ function placeWordDocument(file, text){
     //Note that if the PlacePoint parameter is inside a column, only the vertical (y) //coordinate will be honored--the text frame will expand horizontally to fit the column.
 }
 
-function getWordDocument(){
+function getWordDocument(path){
 
-    var path = new File("~/desktop");
-    var text = path.openDlg("Elige el archivo:");
+    var myFile = new File(path);
+    var text = myFile.openDlg("Elige el archivo:");
     return text;
 }
 
