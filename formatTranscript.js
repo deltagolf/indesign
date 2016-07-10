@@ -1,3 +1,5 @@
+//cd Volumes/HD3/Esto\ no\ es\ una\ escuela/Corriendo\ por\ las\ olas/Transcripciones/Maquetación/Scripts/
+
 main();
 function main(){
     var template = "transcriptions";
@@ -25,6 +27,7 @@ function main(){
   }
 
 function createTableStyle(file, name){
+    /******************* HERE ******************************************/
     var style = file.tableStyles.add({name: name});
     return style;
 }
