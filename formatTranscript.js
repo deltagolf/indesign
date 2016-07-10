@@ -1,16 +1,44 @@
+//Path for git repository
 //cd Volumes/HD3/Esto\ no\ es\ una\ escuela/Corriendo\ por\ las\ olas/Transcripciones/Maquetación/Scripts/
 
 main();
 function main(){
-    var path = "Volumes/HD3/Esto\ no\ es\ una\ escuela/Corriendo\ por\ las\ olas/Transcripciones";
-    var template = "transcriptions";
-    var myDoc = createFromTemplate(template);
+    //Declares path to find documents
+    var path = "Volumes/HD3/Esto\ no\ es\ una\ escuela/Corriendo\ por\ las\ olas/Transcripciones/Maquetación/Pruebas";
+    var template = "plantilla_maestra.indt";
+    //Template used for the document
+    var preset = "transcriptions";
+    //VARIATION: Create from template
+    var myDoc = app.documents.open((File(template), true); OpenOptions.DEFAULT_VALUE);
+    //Creates empty file
+    //var myDoc = createFromPreset(preset);
+    //Sets import preferences for Word docs
     set_Word_import_preferences ();
+    //Gets the contents for a Word Document
     var text = getWordDocument(path);
+    //Places the text in the created file
     placeWordDocument(myDoc, text);
-
+    //Gets the set of pages of the doc
     var pages = myDoc.pages;
+    //Stores number of pages
     var numPages = pages.length;
+    //Create styles
+    //Declare options
+    //Paragraph styles
+    var basicParagraphStyle = {
+        name: ,
+
+    };
+    //Cell styles
+    var basicCellStyle = {
+        name: "Default Cell Style",
+        appliedParagraphStyle : ,
+        rightInset : ,
+        leftInset : 0,
+        topInset : 0,
+        bottomInset : ,
+        verticalJustification : "ALLIGN_TOP"
+    };
     var tableStyle = createTableStyle(myDoc, "Test Style");
     //Tablas anidadas en Archivos de vídeo y Archivos de audio
     var specialTable1 = pages.item(0).allPageItems[0].tables.item(4).cells.item(0).tables.item(0).appliedTableStyle = "Test Style";
@@ -27,16 +55,73 @@ function main(){
     }
   }
 
-function createTableStyle(file, name){
+
+/*
+headerRegionCellStyle
+bodyRegionCellStyle
+footerRegionCellStyle
+name
+spaceAfter
+spaceBefore
+*/
+
+function createTableStyle(file, options){
     /******************* HERE ******************************************/
-    var style = file.tableStyles.add({name: name});
+    var style = file.tableStyles.add(options);
+    return style;
+}
+
+function createCharacterStyle(file, options){
+
+}
+
+/*
+appliedFont
+appliedLanguage
+basedOn
+capitalization  
+    Capitalization.NORMAL
+    Capitalization.SMALL_CAPS
+    Capitalization.ALL_CAPS
+    Capitalization.CAP_TO_SMALL_CAP
+fontStyle
+justification
+    Justification.LEFT_ALIGN
+    Justification.CENTER_ALIGN
+    Justification.RIGHT_ALIGN
+    Justification.LEFT_JUSTIFIED
+    Justification.RIGHT_JUSTIFIED
+    Justification.CENTER_JUSTIFIED
+    Justification.FULLY_JUSTIFIED
+    Justification.TO_BINDING_SIDE
+    Justification.AWAY_FROM_BINDING_SIDE
+
+*/
+
+function createParagraphStyle(file, options){
+    var style = file.paragraphStyles.add(options);
     return style;
 }
 
 
-function createFromTemplate(template){
+/*
+appliedParagraphStyle
+rightInset
+leftInset
+topInset
+bottomInset
+verticalJustification
+*/
+
+function createCellStyle(file, options){
+    var style = file.cellStyles.add(options);
+    return style;
+}
+
+
+function createFromPreset(preset){
     //Creates a new document using the specified document preset.
-    var myDocument = app.documents.add(true, app.documentPresets.item(template));
+    var myDocument = app.documents.add(true, app.documentPresets.item(preset));
     return myDocument;
 }
 
